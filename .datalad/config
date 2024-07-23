@@ -1,2 +1,5 @@
 [datalad "dataset"]
 	id = 995f194e-aa4d-4eb6-8e06-38fbe6ba3bbb
+[datalad "containers.bids-fmriprep"]
+	image = containers/images/bids/bids-fmriprep--20.2.5.sing
+	cmdexec = {img_dspath}/containers/scripts/singularity_cmd run {img} {cmd}
