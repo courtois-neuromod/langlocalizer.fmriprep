@@ -13,3 +13,8 @@
 	url = /lustre03/project/rrg-pbellec/ria-beluga/alias/cneuromod.anat.smriprep
 	datalad-id = f3ef9683-0a58-4d2b-b4eb-d33d8fc3fd2b
 	datalad-url = "ria+file:///lustre03/project/rrg-pbellec/ria-beluga#~cneuromod.anat.smriprep"
+[submodule "sourcedata/cneuromod.langlocalizer"]
+	path = sourcedata/cneuromod.langlocalizer
+	url = /lustre03/project/rrg-pbellec/ria-beluga/alias/cneuromod.langlocalizer.raw
+	datalad-id = 26838a5a-7b2c-4abb-a766-55578c0e5744
+	datalad-url = "ria+file:///lustre03/project/rrg-pbellec/ria-beluga#~cneuromod.langlocalizer.raw"
