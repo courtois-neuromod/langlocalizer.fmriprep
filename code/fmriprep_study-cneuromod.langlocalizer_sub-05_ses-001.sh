@@ -21,7 +21,7 @@ export SINGULARITYENV_TEMPLATEFLOW_HOME="${LOCAL_DATASET}/sourcedata/templateflo
 flock --verbose /project/rrg-pbellec/ria-rorqual/alias/cneuromod.langlocalizer.fmriprep/.datalad_lock datalad clone ria+file:///project/rrg-pbellec/ria-rorqual#~cneuromod.langlocalizer.fmriprep $LOCAL_DATASET
 cd $LOCAL_DATASET
 datalad get -s ria-beluga-storage -J 4 -n -r -R1 . # get sourcedata/* containers
-datalad get -s ria-beluga-storage -J 4 -r sourcedata/templateflow/tpl-{MNI152NLin2009cAsym,OASIS30ANTs,fsLR,fsaverage,MNI152NLin6Asym}
+datalad get -s ria-beluga-storage -J 4 -n -r sourcedata/templateflow/tpl-{MNI152NLin2009cAsym,OASIS30ANTs,fsLR,fsaverage,MNI152NLin6Asym}
 if [ -d sourcedata/smriprep ] ; then
     datalad get -n sourcedata/smriprep sourcedata/smriprep/sourcedata/freesurfer
 fi
@@ -34,7 +34,7 @@ fi
 
 git submodule foreach  --recursive bash -c "git-annex enableremote ria-beluga-storage || true"
 git submodule foreach  --recursive bash -c "git-annex enableremote ria-beluga-storage-local || true"
-
+datalad get -s ria-beluga-storage -J 4 -r sourcedata/templateflow/tpl-{MNI152NLin2009cAsym,OASIS30ANTs,fsLR,fsaverage,MNI152NLin6Asym}
 
 datalad containers-run -m 'fMRIPrep_sub-05/ses-001' -n bids-fmriprep --input sourcedata/templateflow/tpl-MNI152NLin2009cAsym/ --input sourcedata/templateflow/tpl-OASIS30ANTs/ --input sourcedata/templateflow/tpl-fsLR/ --input sourcedata/templateflow/tpl-fsaverage/ --input sourcedata/templateflow/tpl-MNI152NLin6Asym/ --output . --input 'sourcedata/cneuromod.langlocalizer/sub-05/ses-001/fmap/' --input 'sourcedata/cneuromod.langlocalizer/sub-05/ses-001/func/'  --input 'sourcedata/smriprep/sub-05/anat/' --input sourcedata/smriprep/sourcedata/freesurfer/fsaverage/ --input sourcedata/smriprep/sourcedata/freesurfer/sub-05/ -- -w ./workdir --participant-label 05 --anat-derivatives sourcedata/smriprep --fs-subjects-dir sourcedata/smriprep/sourcedata/freesurfer --bids-filter-file code/fmriprep_study-cneuromod.langlocalizer_sub-05_ses-001_bids_filters.json --output-layout bids --ignore slicetiming --use-syn-sdc  --output-spaces MNI152NLin2009cAsym T1w:res-iso2mm --cifti-output 91k --notrack --write-graph --skip_bids_validation --omp-nthreads 8 --nprocs 12 --mem_mb 45056 --fs-license-file code/freesurfer.license  --track-carbon sourcedata/cneuromod.langlocalizer ./ participant 
 fmriprep_exitcode=$?
